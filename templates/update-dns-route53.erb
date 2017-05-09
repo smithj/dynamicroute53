@@ -49,7 +49,10 @@ fi
 /usr/bin/aws route53 change-resource-record-sets --region ${REGION} --hosted-zone-id ${HOSTED_ZONE_ID} \
   --change-batch "{\"Comment\": \"string\",\"Changes\": [{\"Action\": \"CREATE\",\"ResourceRecordSet\": {\"Name\": \"${HOSTNAME}.${DOMAIN}\",\"Type\": \"A\",\"TTL\": ${TTL},\"ResourceRecords\": [{\"Value\": \"${IPV4_ADDRESS}\"}]}}]}"
 <% else %>
-# Set a CNAME record with the public hostname
+# Create an A record with the IP of the public hostname
+IPV4_ADDRESS=$(/usr/bin/env python2 -c "import socket, sys; print socket.gethostbyname(sys.argv[1])" "$PUBLIC_HOSTNAME")
+
 /usr/bin/aws route53 change-resource-record-sets --region ${REGION} --hosted-zone-id ${HOSTED_ZONE_ID} \
-  --change-batch "{\"Comment\": \"string\",\"Changes\": [{\"Action\": \"CREATE\",\"ResourceRecordSet\": {\"Name\": \"${HOSTNAME}.${DOMAIN}\",\"Type\": \"CNAME\",\"TTL\": ${TTL},\"ResourceRecords\": [{\"Value\": \"${PUBLIC_HOSTNAME}\"}]}}]}"
+  --change-batch "{\"Comment\": \"string\",\"Changes\": [{\"Action\": \"CREATE\",\"ResourceRecordSet\": {\"Name\": \"${HOSTNAME}.${DOMAIN}\",\"Type\": \"A\",\"TTL\": ${TTL},\"ResourceRecords\": [{\"Value\": \"${IPV4_ADDRESS}\"}]}}]}"
+
 <% end %>
