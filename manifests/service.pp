@@ -11,7 +11,7 @@ class dynamicroute53::service {
     content => template('dynamicroute53/update-dns-route53.erb'),
     owner   => root,
     group   => root,
-    mode    => '754',
+    mode    => '0754',
     notify  => Service['updatednsroute53']
   }
 
@@ -20,7 +20,7 @@ class dynamicroute53::service {
     content => template('dynamicroute53/delete-dns-route53.erb'),
     owner   => root,
     group   => root,
-    mode    => '754',
+    mode    => '0754',
     notify  => Service['updatednsroute53']
   }
 
@@ -29,7 +29,7 @@ class dynamicroute53::service {
     source  => 'puppet:///modules/dynamicroute53/updatednsroute53.service',
     owner   => root,
     group   => root,
-    mode    => '754',
+    mode    => '0754',
     require => [
       File['/usr/bin/update-dns-route53'],
       File['/usr/bin/delete-dns-route53']
