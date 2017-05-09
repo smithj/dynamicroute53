@@ -32,7 +32,7 @@ HOSTNAME=$(/usr/bin/aws ec2 describe-tags \
             | awk '{print $5}')
 
 # Use whatever IP is currently resolving in-case a record is left over.
-IPV4_ADDRESS=$(/usr/bin/host ${HOSTNAME}.${DOMAIN} | awk '{print $4}')
+IPV4_ADDRESS=$(/usr/bin/env python2 -c "import socket, sys; print socket.gethostbyname(sys.argv[1])" $(/usr/bin/hostname -f))
 
 # Begin changes
 ##############################################################
