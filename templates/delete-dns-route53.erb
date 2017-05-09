@@ -14,8 +14,8 @@ export AWS_ACCESS_KEY_ID=<%= scope.lookupvar('dynamicroute53::aws_access_id') %>
 export AWS_SECRET_ACCESS_KEY=<%= scope.lookupvar('dynamicroute53::aws_secret_key') %>
 
 # Get our Instance ID, local IP, and EC2 Public Hostname using cloud-utils ec2metadata
-INSTANCE_ID=$(/usr/bin/ec2metadata --instance-id)
-PUBLIC_HOSTNAME=$(/usr/bin/ec2metadata --public-hostname)
+INSTANCE_ID=$(curl http://169.254.169.254/latest/meta-data/instance-id)
+PUBLIC_HOSTNAME=$(curl http://169.254.169.254/latest/meta-data/public-hostname)
 
 # Set required variables for Route53 API Call
 HOSTED_ZONE_ID=<%= scope.lookupvar('dynamicroute53::hosted_zone_id') %>

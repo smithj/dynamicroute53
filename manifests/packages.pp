@@ -1,19 +1,7 @@
 class dynamicroute53::packages {
-
-  if ! defined(Package['python-pip']) {
-    package { 'python-pip':
-      ensure => installed,
+  if ! defined(Package['aws-cli']) {
+    package { 'aws-cli':
+      ensure   => installed,
     }
   }
-
-  package { 'awscli':
-    ensure   => installed,
-    require  => Package['python-pip'],
-    provider => pip,
-  }
-
-  package { 'cloud-utils':
-    ensure => installed
-  }
-
 }

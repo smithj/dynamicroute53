@@ -14,9 +14,9 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # Get our Instance ID, local IP, and EC2 Public Hostname using cloud-utils ec2metadata
-INSTANCE_ID=$(/usr/bin/ec2metadata --instance-id)
-IPV4_ADDRESS=$(/usr/bin/ec2metadata --local-ipv4)
-PUBLIC_HOSTNAME=$(/usr/bin/ec2metadata --public-hostname)
+INSTANCE_ID=$(curl http://169.254.169.254/latest/meta-data/instance-id)
+IPV4_ADDRESS=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
+PUBLIC_HOSTNAME=$(curl http://169.254.169.254/latest/meta-data/public-hostname)
 
 # Set required variables for Route53 API Call
 HOSTED_ZONE_ID=<%= scope.lookupvar('dynamicroute53::hosted_zone_id') %>
