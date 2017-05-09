@@ -1,0 +1,10 @@
+[Unit]
+Description=Foo
+
+[Service]
+Type=simple
+Environment=LOCKFILE=/var/lock/updatednsroute53
+ExecStart=/usr/bin/update-dns-route53 1> /tmp/updatedns 2>&1 && touch "$LOCKFILE"
+
+[Install]
+WantedBy=multi-user.target
