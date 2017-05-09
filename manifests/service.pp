@@ -1,7 +1,7 @@
 class dynamicroute53::service {
   if ! defined(Exec['systemd-daemon-reload']) {
     exec {'systemd-daemon-reload':
-      command     => 'systemctl daemon-reload',
+      command     => '/usr/bin/systemctl daemon-reload',
       refreshonly => true,
     }
   }
