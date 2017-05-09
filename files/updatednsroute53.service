@@ -1,10 +1,11 @@
 [Unit]
-Description=Foo
+Description=Updates instance DNS entries in Route53.
 
 [Service]
 Type=simple
 Environment=LOCKFILE=/var/lock/updatednsroute53
-ExecStart=/usr/bin/update-dns-route53 1> /tmp/updatedns 2>&1 && touch "$LOCKFILE"
+ExecStart=/usr/bin/update-dns-route53 1> /tmp/updatedns 2>&1
+ExecStop=/usr/bin/delete-dns-route53 1> /tmp/deletedns 2>&1
 
 [Install]
 WantedBy=multi-user.target
