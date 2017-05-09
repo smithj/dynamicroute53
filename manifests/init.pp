@@ -1,4 +1,5 @@
 class dynamicroute53(
+    $hostname       = undef,
     $domain         = undef,
     $region         = undef,
     $aws_access_id  = undef,
