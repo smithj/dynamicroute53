@@ -1,6 +1,6 @@
 class dynamicroute53::packages {
   if ! defined(Package['aws-cli']) {
-    package { 'aws-cli':
+    package { 'awscli':
       ensure   => installed,
     }
   }
